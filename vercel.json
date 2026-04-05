@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/wish", "destination": "/wish.html" }
+  ],
+  "cleanUrls": true
+}
