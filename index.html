@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 Create a Birthday Surprise!</title>
+  <meta name="description" content="Create a fun, interactive birthday surprise for your friend! Fill in the details and share a magical link." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+</head>
+<body class="creator-page">
+
+  <!-- Animated Background -->
+  <div class="bg-effects">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="floating-emojis-bg" id="floatingEmojisBg"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="creator-main">
+    <header class="creator-header">
+      <div class="logo-anim">
+        <span class="logo-cake">🎂</span>
+        <span class="logo-sparkle">✨</span>
+      </div>
+      <h1 class="creator-title">Birthday Surprise<br/><span class="title-accent">Generator</span></h1>
+      <p class="creator-subtitle">Create an unforgettable birthday experience for someone special</p>
+    </header>
+
+    <form id="birthdayForm" class="glass-card form-card" autocomplete="off">
+      <div class="form-group">
+        <label for="yourName">Your Name</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input type="text" id="yourName" name="yourName" placeholder="Enter your name" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="bdayName">Birthday Person's Name</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🎉</span>
+          <input type="text" id="bdayName" name="bdayName" placeholder="Who's the birthday star?" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age They're Turning</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔢</span>
+          <input type="number" id="age" name="age" placeholder="e.g. 25" min="1" max="150" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Birthday Message</label>
+        <div class="input-wrapper textarea-wrapper">
+          <span class="input-icon">💌</span>
+          <textarea id="message" name="message" placeholder="Write a heartfelt birthday message..." rows="3" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="compliment">A Sweet Compliment</label>
+        <div class="input-wrapper textarea-wrapper">
+          <span class="input-icon">💖</span>
+          <textarea id="compliment" name="compliment" placeholder="What do you love about them?" rows="3" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="photo">Photo URL <span class="optional-badge">Optional</span></label>
+        <div class="input-wrapper">
+          <span class="input-icon">📷</span>
+          <input type="url" id="photo" name="photo" placeholder="https://example.com/photo.jpg" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="music">Background Music URL <span class="optional-badge">Optional</span></label>
+        <div class="input-wrapper">
+          <span class="input-icon">🎵</span>
+          <input type="url" id="music" name="music" placeholder="https://example.com/song.mp3" />
+        </div>
+      </div>
+
+      <button type="submit" id="generateBtn" class="btn-generate">
+        <span class="btn-text">Generate Surprise Link</span>
+        <span class="btn-icon">🎁</span>
+        <div class="btn-shimmer"></div>
+      </button>
+    </form>
+
+    <!-- Generated Link Section -->
+    <div id="linkSection" class="glass-card link-card hidden">
+      <div class="link-success-icon">🎊</div>
+      <h2 class="link-title">Your Surprise Link is Ready!</h2>
+      <p class="link-subtitle">Share this magical link with the birthday person</p>
+      
+      <div class="link-box">
+        <input type="text" id="generatedLink" readonly />
+        <button id="copyBtn" class="btn-copy" title="Copy Link">
+          <span class="copy-icon">📋</span>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+
+      <div class="share-buttons">
+        <a id="whatsappShare" class="btn-share btn-whatsapp" target="_blank" rel="noopener noreferrer">
+          <span>📱 Share on WhatsApp</span>
+        </a>
+        <button id="previewBtn" class="btn-share btn-preview">
+          <span>👀 Preview</span>
+        </button>
+      </div>
+
+      <button id="createAnother" class="btn-another">Create Another Surprise ✨</button>
+    </div>
+  </main>
+
+  <footer class="creator-footer">
+    <p>Made with ❤️ for birthdays everywhere</p>
+  </footer>
+
+  <script src="js/creator.js"></script>
+</body>
+</html>

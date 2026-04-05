@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 You Have a Birthday Surprise!</title>
+  <meta name="description" content="Someone special has a birthday surprise waiting for you! Open the link to find out." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+</head>
+<body class="wish-page">
+
+  <!-- Animated Background -->
+  <div class="bg-effects">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="floating-emojis-bg" id="floatingEmojisBg"></div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-emoji">🎁</div>
+      <p class="loading-text">Someone has a surprise for you...</p>
+      <div class="loading-bar">
+        <div class="loading-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop></audio>
+
+  <!-- ============ STEP 1: HOOK PAGE ============ -->
+  <section id="step1" class="wish-step">
+    <div class="step-content glass-card">
+      <div class="step-emoji-float">
+        <span>🎈</span><span>🎉</span><span>🎊</span>
+      </div>
+      <h1 class="wish-heading">
+        <span id="senderNameDisplay" class="highlight-name"></span> told me today is your birthday,
+        <span id="bdayNameDisplay1" class="highlight-name"></span>...
+      </h1>
+      <p class="wish-subtext">is that true? 😏</p>
+      
+      <div class="button-group">
+        <button id="yesBtn1" class="btn-wish btn-yes" onclick="handleStep1Yes()">
+          YES 😳
+        </button>
+        <button id="noBtn1" class="btn-wish btn-no" onclick="handleStep1No(event)">
+          NO 😒
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2: AGE CONFIRMATION ============ -->
+  <section id="step2" class="wish-step hidden">
+    <div class="step-content glass-card">
+      <div class="step-emoji-float">
+        <span>👀</span><span>🤔</span><span>😮</span>
+      </div>
+      <h1 class="wish-heading" id="ageHeading">
+        Wait… are you really turning <span id="ageDisplay" class="highlight-age"></span> today?? 👀
+      </h1>
+      
+      <div class="button-group" id="step2Buttons">
+        <button id="yesBtn2" class="btn-wish btn-yes" onclick="handleStep2Yes()">
+          YES 🎂
+        </button>
+        <button id="noBtn2" class="btn-wish btn-no" onclick="handleStep2No(event)">
+          NO 🙄
+        </button>
+      </div>
+
+      <div id="step2Reveal" class="reveal-text hidden">
+        <h1 class="mega-text">OMG IT'S REAL 😱🎉</h1>
+        <p class="reveal-sub">Let's celebrate!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3: MINI GAME ============ -->
+  <section id="step3" class="wish-step hidden">
+    <div class="step-content glass-card game-card">
+      <h1 class="wish-heading">A special gift is locked 🎁</h1>
+      <p class="wish-subtext">Pop 15 balloons to unlock it!</p>
+      
+      <div class="game-hud">
+        <div class="game-score">
+          <span>🎈</span> <span id="score">0</span> / 15
+        </div>
+        <div class="game-timer">
+          <span>⏱</span> <span id="timer">20</span>s
+        </div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+
+      <div id="gameArea" class="game-area">
+        <!-- Balloons will be spawned here -->
+      </div>
+
+      <button id="startGameBtn" class="btn-wish btn-yes btn-start-game" onclick="startGame()">
+        Start Game 🎮
+      </button>
+    </div>
+
+    <!-- Game Complete Overlay -->
+    <div id="gameComplete" class="game-complete hidden">
+      <div class="glass-card game-complete-card">
+        <div class="unlock-icon">🎁</div>
+        <h1 class="mega-text">YOU UNLOCKED THE GIFT! 🎉</h1>
+        <p class="reveal-sub">Get ready for something special...</p>
+        <button class="btn-wish btn-yes" onclick="goToFinalWish()">Open My Gift 🎁</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4: FINAL WISH ============ -->
+  <section id="step4" class="wish-step hidden">
+    <canvas id="confettiCanvas"></canvas>
+    <div class="final-wish-content">
+      <div class="final-header">
+        <h1 class="final-title">
+          🎂 Happy Birthday <span id="bdayNameFinal" class="highlight-name"></span> 🎂
+        </h1>
+      </div>
+
+      <div class="final-photo-wrapper" id="photoWrapper">
+        <img id="bdayPhoto" class="final-photo" src="" alt="Birthday Photo" />
+        <div class="photo-glow"></div>
+      </div>
+
+      <div class="glass-card final-message-card">
+        <div class="message-icon">💌</div>
+        <p id="bdayMessage" class="final-message"></p>
+      </div>
+
+      <div class="glass-card final-compliment-card">
+        <div class="compliment-icon">💖</div>
+        <p id="bdayCompliment" class="final-compliment"></p>
+      </div>
+
+      <div class="final-footer">
+        <p class="from-text">— From <span id="senderNameFinal" class="highlight-name"></span> ❤️</p>
+      </div>
+
+      <div class="final-decorations">
+        <span class="deco-star deco-1">⭐</span>
+        <span class="deco-star deco-2">✨</span>
+        <span class="deco-star deco-3">🌟</span>
+        <span class="deco-star deco-4">💫</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/wish.js"></script>
+</body>
+</html>
